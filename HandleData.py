@@ -36,6 +36,7 @@ def initDataToDS(dataFile):
     data = np.asarray(data)
     return data
 
+
 def transformCategoralLabels(datax):
     le = preprocessing.LabelEncoder()
     le.fit(["M", "F", "I"])
@@ -43,8 +44,10 @@ def transformCategoralLabels(datax):
         datax[i][0] = le.transform([datax[i][0]])[0]
     return datax
 
+
 def transformToFloat(data):
     return data.astype(np.float)
+
 
 def divideNPDataToTestTrain(datax, datay, k):
 
@@ -76,6 +79,20 @@ def divideNPDataToTestTrain(datax, datay, k):
 
 
 
+def predict_y(X, theta):
+#      fill code to predict the labels
+    num_samples = len(X)
+    predicted = np.zeros((num_samples,1))
+
+    for i in range(num_samples):
+        for x in X:
+            condition = np.argmax(np.dot(theta, x))
+            # if condition > 0:             WHAT TO DOOOOOOOOO
+            #     predicted[i] = 1
+            # else:
+            #     predicted[i] = -1
+    return predicted
+
 #################### flow - script: ####################
 
 # from file to nparray
@@ -93,3 +110,8 @@ testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
 # normalize: choose zScore or MinMax
 #trainx, testx = normalizeZscore(trainx, testx)
 trainx, testx = normalizeMinMax(trainx, testx)
+
+w = Percpetron.perceptron(trainx,trainy)
+predict = predict_y(trainx, w)
+print("w is: " ,w)
+
