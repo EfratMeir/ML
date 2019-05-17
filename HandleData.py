@@ -1,4 +1,6 @@
 import numpy as np
+import Percpetron
+from sklearn import preprocessing
 
 
 def initDataToDS(dataFile):
@@ -13,10 +15,10 @@ def initDataToDS(dataFile):
 datax = initDataToDS('train_x.txt')
 datay = initDataToDS('train_y.txt')
 
+
 # add x and y together:
 numFeatures = len(datax[0])
 alldata = np.zeros((len(datax[:,1]), numFeatures + 1))
-
 alldata = np.append(datax, datay, axis=1)
 alldata = np.random.permutation(alldata)
 
@@ -37,14 +39,15 @@ for i in range(groupLen):
     testy.append(datay[i])
 
 testx = np.asarray(testx)
-testy = np.asarray(testy)
-
+testy = np.asarray(testy,None, 'F')
 
 for i in range(groupLen, dataLen):
     trainx.append(datax[i])
-    trainy.append((datay[i]))
+    trainy.append(datay[i])
 
 trainx = np.asarray(trainx)
-trainy = np.asarray(trainy)
+trainy = np.asarray(trainy,None,'F')
 
-print('dd')
+
+w, y_hat = Percpetron.perceptron(trainx, trainy)
+print("dd")
