@@ -111,18 +111,10 @@ def script():
     # just for us (not for submission) - divide datax to new data set and train set:
     testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
 
-    ################################################
-    import sys
-    args = sys.argv[1:]
-    testxFileName = args[2]
-    testx = initDataToDS(testxFileName)
-    testx = transformCategoralLabels(testx)
-    test2x = transformToFloat(testx)
 
-    ##################################################
     # normalize: choose zScore or MinMax
     # trainx, testx = normalizeZscore(trainx, testx)
-    trainx, test2x = normalizeMinMax(trainx, test2x)
+    trainx, test2x = normalizeMinMax(trainx, testx)
 
     w = SVM.SVM(trainx,trainy)
     # w = Percpetron.perceptron(trainx,trainy)
@@ -134,4 +126,4 @@ def script():
     print("precision on test set is " , precision_test)
     print (", SVM: " , predict_test)
 #
-# script()
+script()
