@@ -1,5 +1,6 @@
 import numpy as np
 import random
+from numpy import linalg as LA
 
 ##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     THIS IS STEEL SVM, I HAVENT CHANGED YET         !!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -18,8 +19,10 @@ def PA(x_train,y_train):
             y_hat = np.argmax(np.dot(w, x))
             #update
             if y != y_hat:
-                w[y, :] = w[y, :] * (1 - (eta*lamda)) + eta * x
-                w[y_hat, :] = w[y_hat, :] * (1 - (eta*lamda)) - eta * x
+                loss = max(0, 1 - np.dot(w[y:,], np.transpose(x))[0] + np.dot(w[y:, ], np.transpose(x))[0])
+                T = loss / (2 * (LA.norm(x)) ** 2)
+                w[y, :] = w[y, :] + T * x
+                w[y_hat, :] = w[y_hat, :] - T * x
     return w
 
 ##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     THIS IS STEEL SVM, I HAVENT CHANGED YET         !!!!!!!!!!!!!!!!!!!!!!!!!
