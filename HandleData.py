@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.utils import *
-from sklearn import preprocessing
+import SVM
 
 
 def normalizeZscore(trainx, testx):
@@ -111,10 +111,11 @@ datay = transformToFloat(datay)
 testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
 
 # normalize: choose zScore or MinMax
-#trainx, testx = normalizeZscore(trainx, testx)
+# trainx, testx = normalizeZscore(trainx, testx)
 trainx, testx = normalizeMinMax(trainx, testx)
 
-w = Percpetron.perceptron(trainx,trainy)
+w = SVM.SVM(trainx,trainy)
+# w = Percpetron.perceptron(trainx,trainy)
 predict_train = predict_y(trainx, w)
 predict_test = predict_y(testx, w)
 precision_test = evaluate(predict_test, testy)
