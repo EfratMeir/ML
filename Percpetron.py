@@ -2,7 +2,7 @@ import numpy as np
 import random
 
 def perceptron(x_train,y_train):
-    epoches = 10
+    epoches = 1000
     class_num = 3 #how to do not hard coded???????
     features_num = len(x_train[0])
 

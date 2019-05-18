@@ -22,6 +22,8 @@ def run():
     trainy = transformToFloat(trainy)
     testx = transformToFloat(testx)
 
+    trainx, trainy = shuffle(trainx, trainy, random_state=1)
+
     # normalize: choose zScore or MinMax
     # trainx, testx = normalizeZscore(trainx, testx)
     trainx, testx = normalizeMinMax(trainx, testx)
