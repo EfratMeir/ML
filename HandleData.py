@@ -78,20 +78,23 @@ def divideNPDataToTestTrain(datax, datay, k):
     return testx, testy, trainx, trainy
 
 
-
 def predict_y(X, theta):
 #      fill code to predict the labels
     num_samples = len(X)
     predicted = np.zeros((num_samples,1))
-
     for i in range(num_samples):
-        for x in X:
-            condition = np.argmax(np.dot(theta, x))
-            # if condition > 0:             WHAT TO DOOOOOOOOO
-            #     predicted[i] = 1
-            # else:
-            #     predicted[i] = -1
+        predicted[i] = np.argmax(np.dot(theta, X[i]))
     return predicted
+
+
+def evaluate(predicted_y, true_y):
+    num_samples = len(predicted_y)
+    counter = 0
+    for i in range(num_samples):
+        if predicted_y[i][0] == true_y[i][0]: #if predict is good
+            counter = counter + 1
+    precision = counter / num_samples
+    return precision
 
 #################### flow - script: ####################
 
@@ -112,6 +115,10 @@ testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
 trainx, testx = normalizeMinMax(trainx, testx)
 
 w = Percpetron.perceptron(trainx,trainy)
-predict = predict_y(trainx, w)
-print("w is: " ,w)
+predict_train = predict_y(trainx, w)
+predict_test = predict_y(testx, w)
+precision_test = evaluate(predict_test, testy)
+precision_training = evaluate(predict_train, trainy)
+print("precision on training set is " , precision_training)
+print("precision on test set is " , precision_test)
 
