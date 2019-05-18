@@ -1,6 +1,9 @@
 import numpy as np
 import random
 
+##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     THIS IS STEEL SVM, I HAVENT CHANGED YET         !!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 def PA(x_train,y_train):
     epoches = 2000
     class_num = 3 #how to do not hard coded???????
@@ -19,4 +22,4 @@ def PA(x_train,y_train):
                 w[y_hat, :] = w[y_hat, :] * (1 - (eta*lamda)) - eta * x
     return w
 
-
+##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!     THIS IS STEEL SVM, I HAVENT CHANGED YET         !!!!!!!!!!!!!!!!!!!!!!!!!

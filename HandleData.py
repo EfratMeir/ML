@@ -96,30 +96,32 @@ def evaluate(predicted_y, true_y):
     precision = counter / num_samples
     return precision
 
-#################### flow - script: ####################
+def script():
+    #################### flow - script: ####################
 
-# from file to nparray
-datax = initDataToDS('train_x.txt')
-datay = initDataToDS('train_y.txt')
+    # from file to nparray
+    datax = initDataToDS('train_x.txt')
+    datay = initDataToDS('train_y.txt')
 
-# change to correct types:
-datax = transformCategoralLabels(datax)
-datax = transformToFloat(datax)
-datay = transformToFloat(datay)
+    # change to correct types:
+    datax = transformCategoralLabels(datax)
+    datax = transformToFloat(datax)
+    datay = transformToFloat(datay)
 
-# just for us (not for submission) - divide datax to new data set and train set:
-testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
+    # just for us (not for submission) - divide datax to new data set and train set:
+    testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
 
-# normalize: choose zScore or MinMax
-# trainx, testx = normalizeZscore(trainx, testx)
-trainx, testx = normalizeMinMax(trainx, testx)
+    # normalize: choose zScore or MinMax
+    # trainx, testx = normalizeZscore(trainx, testx)
+    trainx, testx = normalizeMinMax(trainx, testx)
 
-w = SVM.SVM(trainx,trainy)
-# w = Percpetron.perceptron(trainx,trainy)
-predict_train = predict_y(trainx, w)
-predict_test = predict_y(testx, w)
-precision_test = evaluate(predict_test, testy)
-precision_training = evaluate(predict_train, trainy)
-print("precision on training set is " , precision_training)
-print("precision on test set is " , precision_test)
+    w = SVM.SVM(trainx,trainy)
+    # w = Percpetron.perceptron(trainx,trainy)
+    predict_train = predict_y(trainx, w)
+    predict_test = predict_y(testx, w)
+    precision_test = evaluate(predict_test, testy)
+    precision_training = evaluate(predict_train, trainy)
+    print("precision on training set is " , precision_training)
+    print("precision on test set is " , precision_test)
 
+# script()

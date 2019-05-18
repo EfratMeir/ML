@@ -16,6 +16,7 @@ def run():
 
     # change to correct types:
     trainx = transformCategoralLabels(trainx)
+    testx = transformCategoralLabels(testx)
 
     trainx = transformToFloat(trainx)
     trainy = transformToFloat(trainy)
@@ -36,7 +37,7 @@ def run():
     pa_predict = predict_y(testx, pa_w)
 
     for i in range(len(testx)):
-        print("perceptron: " + str(percpetron_predict[i]) + ", SVM: " + str(svm_predict[i]))# + ", pa: " + str(pa_predict[i]))
+        print("perceptron: " + str(percpetron_predict[i][0].astype(np.int)) + ", SVM: " + str(svm_predict[i][0].astype(np.int)))# + ", pa: " + str(pa_predict[i][0].astype(np.int)))
 
 
 run()
