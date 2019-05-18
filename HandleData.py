@@ -1,7 +1,9 @@
 import numpy as np
 from sklearn.utils import *
 import SVM
-
+import Percpetron
+import PA
+from sklearn import preprocessing
 
 def normalizeZscore(trainx, testx):
     mean = np.mean(trainx, axis=0)
@@ -23,8 +25,7 @@ def normalizeMinMax(trainx, testx):
 
 def getMinMaxScore(val, min, max):
     return (val - min) / (max - min)
-import Percpetron
-from sklearn import preprocessing
+
 
 
 def initDataToDS(dataFile):
@@ -141,7 +142,6 @@ def script():
     # just for us (not for submission) - divide datax to new data set and train set:
     #testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
 
-
     # CV:
     k = 3
     res = divideToKfoldCV(datax, datay,k)  # res is a list with k rows, where each row is a [testx, testy, trainx, trainy] data
@@ -154,7 +154,8 @@ def script():
         #trainx, testx = normalizeMinMax(trainx, testx)
 
         #w = SVM.SVM(trainx,trainy)
-        w = Percpetron.perceptron(trainx,trainy)
+        #w = Percpetron.perceptron(trainx,trainy)
+        w = PA.PA(trainx, trainy)
         predict_train = predict_y(trainx, w)
         predict_test = predict_y(testx, w)
         precision_test = evaluate(predict_test, testy)
@@ -167,5 +168,34 @@ def script():
 
     print("after " + str(k) + " iteraions of cross validation, precision on test set is " , str(avgPrecision))
 
+script()
 
-#script()
+
+# =======
+#     testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
+#
+#     ################################################
+#     import sys
+#     args = sys.argv[1:]
+#     testxFileName = args[2]
+#     testx = initDataToDS(testxFileName)
+#     testx = transformCategoralLabels(testx)
+#     test2x = transformToFloat(testx)
+#
+#     ##################################################
+#     # normalize: choose zScore or MinMax
+#     # trainx, testx = normalizeZscore(trainx, testx)
+#     trainx, test2x = normalizeMinMax(trainx, test2x)
+#
+#     w = SVM.SVM(trainx,trainy)
+#     # w = Percpetron.perceptron(trainx,trainy)
+#     # predict_train = predict_y(trainx, w)
+#     predict_test = predict_y(test2x, w)
+#     precision_test = evaluate(predict_test, testy)
+#     # precision_training = evaluate(predict_train, trainy)
+#     # print("precision on training set is " , precision_training)
+#     print("precision on test set is " , precision_test)
+#     print (", SVM: " , predict_test)
+# #
+# # script()
+# >>>>>>> 66ed454f80438d82cbedeb33e8684de19ba2e409

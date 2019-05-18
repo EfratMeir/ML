@@ -1,9 +1,24 @@
-import hashlib
+import sys
+from HandleData import *
+def script():
+    args = sys.argv[1:]
+    trainx = initDataToDS('train_x.txt')
+    trainy = initDataToDS('train_y.txt')
+    testxFileName = args[2]
+    testx = initDataToDS(testxFileName)
+    # trainx = initDataToDS(trainxFileName)
+    # trainy = initDataToDS(trainyFileName)
+    trainx = transformCategoralLabels(trainx)
+    testx = transformCategoralLabels(testx)
 
-s = 'she sells sea shells by the sea shore'
 
-# Use hashlib
-print(hash('F').__abs__())
-print(hash('M').__abs__())
-print(hash('I').__abs__())
-print(hash('M').__abs__())
+    trainx = transformToFloat(trainx)
+    trainy = transformToFloat(trainy)
+    test2x = transformToFloat(testx)
+    trainx, trainy = shuffle(trainx, trainy, random_state=1)
+
+    trainx, test2x = normalizeMinMax(trainx, test2x)
+    w = SVM.SVM(trainx, trainy)
+    predict_test = predict_y(test2x, w)
+    print(predict_test)
+script()
