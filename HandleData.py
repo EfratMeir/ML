@@ -124,4 +124,4 @@ def script():
     print("precision on training set is " , precision_training)
     print("precision on test set is " , precision_test)
 
-# script()
+script()

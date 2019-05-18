@@ -5,7 +5,7 @@ import random
 
 
 def PA(x_train,y_train):
-    epoches = 2000
+    epoches = 10
     class_num = 3 #how to do not hard coded???????
     features_num = len(x_train[0])
     lamda = 0.2
