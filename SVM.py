@@ -3,7 +3,7 @@ import random
 
 
 def SVM(x_train,y_train):
-    epoches = 10
+    epoches = 400
     class_num = 3 #how to do not hard coded???????
     features_num = len(x_train[0])
     lamda = 0.2
@@ -18,5 +18,8 @@ def SVM(x_train,y_train):
             if y != y_hat:
                 w[y, :] = w[y, :] * (1 - (eta*lamda)) + eta * x
                 w[y_hat, :] = w[y_hat, :] * (1 - (eta*lamda)) - eta * x
+            else:
+                w[y, :] = w[y, :] * (1 - (eta * lamda))
+                w[y_hat, :] = w[y_hat, :] * (1 - (eta * lamda))
     return w
 
