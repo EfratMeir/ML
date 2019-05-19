@@ -3,7 +3,7 @@ import random
 
 def perceptron(x_train,y_train):
     epoches = 100
-    class_num = 3 #how to do not hard coded???????
+    class_num = 3
     features_num = len(x_train[0])
 
     w = np.zeros((class_num, features_num))

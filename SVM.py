@@ -4,7 +4,7 @@ import random
 
 def SVM(x_train,y_train):
     epoches = 150
-    class_num = 3 #how to do not hard coded???????
+    class_num = 3
     features_num = len(x_train[0])
     lamda = 0.2
     w = np.zeros((class_num, features_num))

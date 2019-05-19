@@ -17,7 +17,7 @@ def PA(x_train,y_train):
             y_hat = np.argmax(np.dot(w, x))
             #update
             if y != y_hat:
-                loss = max(0, 1 - np.dot(w[y:,], np.transpose(x))[0] + np.dot(w[y:, ], np.transpose(x))[0])
+                loss = max(0, 1 - np.dot(w[y:, ], np.transpose(x))[0] + np.dot(w[y:, ], np.transpose(x))[0])
                 T = loss / (2 * (LA.norm(x)) ** 2)
                 w[y, :] = w[y, :] + T * x
                 w[y_hat, :] = w[y_hat, :] - T * x
