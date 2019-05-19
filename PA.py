@@ -4,7 +4,7 @@ from numpy import linalg as LA
 
 
 def PA(x_train,y_train):
-    epoches = 10
+    epoches = 100
     class_num = 3 #how to do not hard coded???????
     features_num = len(x_train[0])
     lamda = 0.2
