@@ -153,9 +153,12 @@ def script():
         trainx, testx = normalizeZscore(trainx, testx)
         #trainx, testx = normalizeMinMax(trainx, testx)
 
-        #w = SVM.SVM(trainx,trainy)
+        print('running SVM')
+        w = SVM.SVM(trainx,trainy)
+        # print('running percptron')
         #w = Percpetron.perceptron(trainx,trainy)
-        w = PA.PA(trainx, trainy)
+        # print('running PA')
+        #w = PA.PA(trainx, trainy)
         predict_train = predict_y(trainx, w)
         predict_test = predict_y(testx, w)
         precision_test = evaluate(predict_test, testy)
@@ -171,7 +174,6 @@ def script():
 script()
 
 
-# =======
 #     testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
 #
 #     ################################################
