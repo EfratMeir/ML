@@ -1,9 +1,7 @@
 import numpy as np
-from sklearn.utils import *
 import SVM
 import Percpetron
 import PA
-from sklearn import preprocessing
 
 #################
 #shuffle rows in x and y in the same order
@@ -47,6 +45,8 @@ def getMinMaxScore(val, min, max):
 
 
 def initDataToDS(dataFile):
+    print("in initDataToDS")
+
     filex = open(dataFile, 'r')
     datatmp = filex.read().split('\n')
     data = []
@@ -57,19 +57,31 @@ def initDataToDS(dataFile):
 
 
 def transformCategoralLabels(datax):
-    le = preprocessing.LabelEncoder()
-    le.fit(["M", "F", "I"])
+    print("in transformCategoralLabels")
+
+    # le = preprocessing.LabelEncoder()
+    # le.fit(["M", "F", "I"])
     for i in range(len(datax)):
-        datax[i][0] = le.transform([datax[i][0]])[0]
+        for j in range(len(datax[0])):
+            print (datax[i][j])
+            if datax[i][j] == 'M':
+                datax[i][j] = 0.0
+            if datax[i][j] == 'F':
+                datax[i][j] = 1.0
+            if datax[i][j] == 'I':
+                datax[i][j] = 2.0
     return datax
 
 
 def transformToFloat(data):
+    print("in transformToFloat")
+
     return data.astype(np.float)
 
 def divideToKfoldCV(datax, datay, k):
-    datax, datay = shuffle(datax, datay, random_state=1)
+    print("in divideToKfoldCV")
 
+    datax, datay = shuffle2arr(datax, datay)
     ret = []
     allData = np.append(datax, np.asarray(datay, None, 'F'), axis=1)
 
@@ -96,6 +108,7 @@ def divideToKfoldCV(datax, datay, k):
     return ret
 
 def divideNPDataToTestTrain(datax, datay, k):
+    print("in divideNPDataToTestTrain")
 
     # datax, datay = shuffle(datax, datay, random_state=1)
     datax, datay = shuffle2arr(datax, datay)
@@ -126,7 +139,9 @@ def divideNPDataToTestTrain(datax, datay, k):
 
 
 def predict_y(X, theta):
-#      fill code to predict the labels
+    print("in predict_y")
+
+    #      fill code to predict the labels
     num_samples = len(X)
     predicted = np.zeros((num_samples,1))
     for i in range(num_samples):
@@ -135,6 +150,8 @@ def predict_y(X, theta):
 
 
 def evaluate(predicted_y, true_y):
+    print("in evaluate")
+
     num_samples = len(predicted_y)
     counter = 0
     for i in range(num_samples):
@@ -146,6 +163,8 @@ def evaluate(predicted_y, true_y):
 
 
 def script():
+    print("in script")
+
     #################### flow - script: ####################
 
     # from file to nparray

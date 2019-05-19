@@ -4,6 +4,8 @@ from numpy import linalg as LA
 
 
 def PA(x_train,y_train):
+    print("in pa")
+
     epoches = 300
     class_num = 3 #how to do not hard coded???????
     features_num = len(x_train[0])

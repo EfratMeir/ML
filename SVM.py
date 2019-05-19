@@ -3,6 +3,8 @@ import random
 
 
 def SVM(x_train,y_train):
+    print("in svm")
+
     epoches = 150
     class_num = 3
     features_num = len(x_train[0])

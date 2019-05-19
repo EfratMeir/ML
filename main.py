@@ -4,6 +4,7 @@ import SVM, Percpetron, PA
 
 # putt the script here
 def run():
+    print("in run")
     args = sys.argv[1:]
     trainxFileName = args[0]
     trainyFileName = args[1]
@@ -27,7 +28,7 @@ def run():
 
     # normalize: choose zScore or MinMax ****normlize without the category column*******
     # trainx, testx = normalizeZscore(trainx, testx)
-    trainx[:, 1:], testx[:, 1:] = normalizeMinMax(trainx[:, 1:], testx[:, 1:])
+    trainx, testx = normalizeMinMax(trainx, testx)
 
     # normalize: choose zScore or MinMax
     # trainx, testx = normalizeZscore(trainx, testx)

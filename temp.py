@@ -15,7 +15,7 @@ def script():
     trainx = transformToFloat(trainx)
     trainy = transformToFloat(trainy)
     test2x = transformToFloat(testx)
-    trainx, trainy = shuffle(trainx, trainy, random_state=1)
+    trainx, trainy = shuffle2arr(trainx, trainy)
 
     trainx, test2x = normalizeMinMax(trainx, test2x)
     w = SVM.SVM(trainx, trainy)
