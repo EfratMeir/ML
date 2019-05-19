@@ -45,41 +45,38 @@ def getMinMaxScore(val, min, max):
 
 
 def initDataToDS(dataFile):
-    print("in initDataToDS")
 
     filex = open(dataFile, 'r')
     datatmp = filex.read().split('\n')
     data = []
     for line in datatmp:
-      data.append(line.split(','))
+        if line != "":
+            data.append(line.split(','))
     data = np.asarray(data)
     return data
 
 
 def transformCategoralLabels(datax):
-    print("in transformCategoralLabels")
-
     # le = preprocessing.LabelEncoder()
     # le.fit(["M", "F", "I"])
-    for i in range(len(datax)):
-        for j in range(len(datax[0])):
-            print (datax[i][j])
+    for i in range(2):
+        for j in range(8):
             if datax[i][j] == 'M':
-                datax[i][j] = 0.0
-            if datax[i][j] == 'F':
-                datax[i][j] = 1.0
-            if datax[i][j] == 'I':
-                datax[i][j] = 2.0
+                datax[i][j] = '0'
+
+            elif datax[i][j] == 'F':
+                datax[i][j] = '1'
+
+            elif datax[i][j] == 'I':
+                datax[i][j] = '2'
+
     return datax
 
 
 def transformToFloat(data):
-    print("in transformToFloat")
-
     return data.astype(np.float)
 
 def divideToKfoldCV(datax, datay, k):
-    print("in divideToKfoldCV")
 
     datax, datay = shuffle2arr(datax, datay)
     ret = []
@@ -108,7 +105,6 @@ def divideToKfoldCV(datax, datay, k):
     return ret
 
 def divideNPDataToTestTrain(datax, datay, k):
-    print("in divideNPDataToTestTrain")
 
     # datax, datay = shuffle(datax, datay, random_state=1)
     datax, datay = shuffle2arr(datax, datay)
@@ -139,7 +135,6 @@ def divideNPDataToTestTrain(datax, datay, k):
 
 
 def predict_y(X, theta):
-    print("in predict_y")
 
     #      fill code to predict the labels
     num_samples = len(X)
@@ -150,7 +145,6 @@ def predict_y(X, theta):
 
 
 def evaluate(predicted_y, true_y):
-    print("in evaluate")
 
     num_samples = len(predicted_y)
     counter = 0
@@ -163,7 +157,6 @@ def evaluate(predicted_y, true_y):
 
 
 def script():
-    print("in script")
 
     #################### flow - script: ####################
 

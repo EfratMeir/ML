@@ -2,7 +2,6 @@ import numpy as np
 import random
 
 def perceptron(x_train,y_train):
-    print("in percrptron")
 
     epoches = 150
     class_num = 3

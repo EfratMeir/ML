@@ -4,7 +4,6 @@ import SVM, Percpetron, PA
 
 # putt the script here
 def run():
-    print("in run")
     args = sys.argv[1:]
     trainxFileName = args[0]
     trainyFileName = args[1]
@@ -45,7 +44,7 @@ def run():
     pa_predict = predict_y(testx, pa_w)
 
     for i in range(len(testx)):
-        print("perceptron: " + str(percpetron_predict[i][0].astype(np.int)) + ", SVM: " + str(svm_predict[i][0].astype(np.int)) + ", pa: " + str(pa_predict[i][0].astype(np.int)))
+        print("perceptron: " + str(percpetron_predict[i][0].astype(np.int)) + ", svm: " + str(svm_predict[i][0].astype(np.int)) + ", pa: " + str(pa_predict[i][0].astype(np.int)))
 
 
-run()
+# run()
