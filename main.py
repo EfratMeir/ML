@@ -22,11 +22,16 @@ def run():
     trainy = transformToFloat(trainy)
     testx = transformToFloat(testx)
 
-    trainx, trainy = shuffle(trainx, trainy, random_state=1)
+    trainx, trainy = shuffle2arr(trainx, trainy)
+    # trainx, trainy = shuffle(trainx, trainy, random_state=1)
+
+    # normalize: choose zScore or MinMax ****normlize without the category column*******
+    # trainx, testx = normalizeZscore(trainx, testx)
+    trainx[:, 1:], testx[:, 1:] = normalizeMinMax(trainx[:, 1:], testx[:, 1:])
 
     # normalize: choose zScore or MinMax
     # trainx, testx = normalizeZscore(trainx, testx)
-    trainx, testx = normalizeMinMax(trainx, testx)
+    # trainx, testx = normalizeMinMax(trainx, testx)
 
     # train the models:
     percpetron_w = Percpetron.perceptron(trainx, trainy)

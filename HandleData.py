@@ -5,6 +5,24 @@ import Percpetron
 import PA
 from sklearn import preprocessing
 
+#################
+#shuffle rows in x and y in the same order
+#############
+def shuffle2arr(x,y):
+    # add x and y together:
+    numFeatures = len(x[0])
+    # alldata = np.zeros((len(x[:, 1]), numFeatures + 1))
+
+    alldata = np.append(x, y, axis=1)
+    np.random.seed(0)
+    alldata = np.random.permutation(alldata)
+
+    datax = alldata[:, :-1]
+    datay = alldata[:, -1]
+
+    return datax, datay
+
+
 def normalizeZscore(trainx, testx):
     mean = np.mean(trainx, axis=0)
     std = np.std(trainx, axis=0)
@@ -50,7 +68,6 @@ def transformToFloat(data):
     return data.astype(np.float)
 
 def divideToKfoldCV(datax, datay, k):
-
     datax, datay = shuffle(datax, datay, random_state=1)
 
     ret = []
@@ -80,7 +97,8 @@ def divideToKfoldCV(datax, datay, k):
 
 def divideNPDataToTestTrain(datax, datay, k):
 
-    datax, datay = shuffle(datax, datay, random_state=1)
+    # datax, datay = shuffle(datax, datay, random_state=1)
+    datax, datay = shuffle2arr(datax, datay)
 
     testx= []
     testy = []
@@ -153,12 +171,12 @@ def script():
         trainx, testx = normalizeZscore(trainx, testx)
         #trainx, testx = normalizeMinMax(trainx, testx)
 
-        print('running SVM')
-        w = SVM.SVM(trainx,trainy)
+        # print('running SVM')
+        # w = SVM.SVM(trainx,trainy)
         # print('running percptron')
-        #w = Percpetron.perceptron(trainx,trainy)
-        # print('running PA')
-        #w = PA.PA(trainx, trainy)
+        # w = Percpetron.perceptron(trainx,trainy)
+        print('running PA')
+        w = PA.PA(trainx, trainy)
         predict_train = predict_y(trainx, w)
         predict_test = predict_y(testx, w)
         precision_test = evaluate(predict_test, testy)
@@ -171,7 +189,7 @@ def script():
 
     print("after " + str(k) + " iteraions of cross validation, precision on test set is " , str(avgPrecision))
 
-script()
+# script()
 
 
 #     testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)
