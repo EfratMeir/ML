@@ -1,6 +1,7 @@
 import numpy as np
 import SVM
 import Percpetron
+import sklearn
 import PA
 
 #################
@@ -59,8 +60,8 @@ def initDataToDS(dataFile):
 def transformCategoralLabels(datax):
     # le = preprocessing.LabelEncoder()
     # le.fit(["M", "F", "I"])
-    for i in range(2):
-        for j in range(8):
+    for i in range(len(datax)):
+        for j in range(len(datax[0])):
             if datax[i][j] == 'M':
                 datax[i][j] = '0'
 
@@ -78,7 +79,7 @@ def transformToFloat(data):
 
 def divideToKfoldCV(datax, datay, k):
 
-    datax, datay = shuffle2arr(datax, datay)
+    datax, datay = sklearn.utils.shuffle(datax, datay, random_state=0)
     ret = []
     allData = np.append(datax, np.asarray(datay, None, 'F'), axis=1)
 
@@ -201,7 +202,7 @@ def script():
 
     print("after " + str(k) + " iteraions of cross validation, precision on test set is " , str(avgPrecision))
 
-# script()
+script()
 
 
 #     testx, testy, trainx, trainy = divideNPDataToTestTrain(datax, datay, 4)

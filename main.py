@@ -47,4 +47,4 @@ def run():
         print("perceptron: " + str(percpetron_predict[i][0].astype(np.int)) + ", svm: " + str(svm_predict[i][0].astype(np.int)) + ", pa: " + str(pa_predict[i][0].astype(np.int)))
 
 
-# run()
+run()
